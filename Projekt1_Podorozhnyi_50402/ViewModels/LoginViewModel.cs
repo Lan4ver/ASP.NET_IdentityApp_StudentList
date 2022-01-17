@@ -9,6 +9,7 @@ namespace Projekt1_Podorozhnyi_50402.ViewModels
     public class LoginViewModel
     {
         [Required]
+        [DataType(DataType.EmailAddress)]
         [Display(Name ="Email")]
         public string Email { get; set; }
 

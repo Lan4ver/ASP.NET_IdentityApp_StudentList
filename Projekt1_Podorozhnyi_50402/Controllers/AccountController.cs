@@ -30,7 +30,7 @@ namespace Projekt1_Podorozhnyi_50402.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email, UserName = model.Email, Year = model.Year };
+                User user = new User { Email = model.Email, UserName = model.Email, Name = model.Name, Surname = model.Surname, StudentNum = model.StudentNum, Year = model.Year };
 
                 var resault = await _userManager.CreateAsync(user, model.Password);
                 if(resault.Succeeded)
