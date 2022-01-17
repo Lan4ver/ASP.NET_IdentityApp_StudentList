@@ -39,6 +39,8 @@ namespace Projekt1_Podorozhnyi_50402
                 opts.Password.RequireLowercase = false; 
                 opts.Password.RequireUppercase = false; 
                 opts.Password.RequireDigit = false;
+                opts.User.RequireUniqueEmail = true;    // уникальный email
+                opts.User.AllowedUserNameCharacters = ".@abcdefghijklmnopqrstuvwxyz123456789"; // допустимые символы
             })
                 .AddEntityFrameworkStores<ApplicationContext>();
 
