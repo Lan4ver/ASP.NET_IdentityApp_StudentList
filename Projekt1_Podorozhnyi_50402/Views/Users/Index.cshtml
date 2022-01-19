@@ -4,6 +4,8 @@
     ViewBag.Title = "Users List";
 }
 
+<a asp-action="Create">Add Student</a>
+
 <table class="table">
     <tr><th>Email</th><th>Name</th><th>Surname</th><th>Student Number</th><th>Year</th><th></th></tr>
     @foreach (var user in Model)

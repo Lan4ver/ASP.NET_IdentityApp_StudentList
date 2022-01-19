@@ -24,7 +24,6 @@ namespace Projekt1_Podorozhnyi_50402.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -74,7 +73,7 @@ namespace Projekt1_Podorozhnyi_50402.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "ERROR");
+                    ModelState.AddModelError("", "Wrong password");
                 }
             }            
             return View(model);

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace Projekt1_Podorozhnyi_50402.ViewModels
 {
@@ -40,7 +40,6 @@ namespace Projekt1_Podorozhnyi_50402.ViewModels
         [Compare("Password", ErrorMessage = "Different passwords")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm Password")]
-        public string PasswordConfirm { get; set; }
-
+        public string PasswordConfirm { get; set; }        
     }
 }

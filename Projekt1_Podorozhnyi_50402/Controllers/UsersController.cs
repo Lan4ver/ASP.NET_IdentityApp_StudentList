@@ -7,6 +7,7 @@ using Projekt1_Podorozhnyi_50402.Models;
 using Projekt1_Podorozhnyi_50402.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace Projekt1_Podorozhnyi_50402.Controllers
 {
@@ -18,7 +19,16 @@ namespace Projekt1_Podorozhnyi_50402.Controllers
         {
             _userManager = userManager;
         }
-        public IActionResult Index() => View(_userManager.Users.ToList());        
+        public async Task<IActionResult> Search()
+        {
+            return View();
+        }
+        public async Task<IActionResult> ShowSearchResult(string SearchStudent)
+        {
+            return View("Index", await _userManager.Users.Where(j => j.Email.Contains(SearchStudent)).ToListAsync());
+        }
+
+        public IActionResult Index() => View(_userManager.Users.ToList());
 
         public async Task<IActionResult> Edit(string id)
         {
@@ -117,6 +127,29 @@ namespace Projekt1_Podorozhnyi_50402.Controllers
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Cant found user");
+                }
+            }
+            return View(model);
+        }
+        public IActionResult Create() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = new User { Email = model.Email, UserName = model.Email, Name = model.Name, Surname = model.Surname, StudentNum = model.StudentNum, Year = model.Year };
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
                 }
             }
             return View(model);
