@@ -29,17 +29,23 @@ namespace Projekt1_Podorozhnyi_50402.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (_userManager.Users.Any(x => x.StudentNum == model.StudentNum))
+                {
+                    ModelState.AddModelError(string.Empty, "The student with such number is already exists");
+                    return View(model);
+                }
+
                 User user = new User { Email = model.Email, UserName = model.Email, Name = model.Name, Surname = model.Surname, StudentNum = model.StudentNum, Year = model.Year };
 
                 var resault = await _userManager.CreateAsync(user, model.Password);
-                if(resault.Succeeded)
+                if (resault.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    foreach(var error in resault.Errors)
+                    foreach (var error in resault.Errors)
                     {
                         ModelState.AddModelError(string.Empty, error.Description);
                     }
@@ -75,9 +81,9 @@ namespace Projekt1_Podorozhnyi_50402.Controllers
                 {
                     ModelState.AddModelError("", "Wrong password");
                 }
-            }            
+            }
             return View(model);
-        }    
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()

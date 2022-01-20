@@ -22,7 +22,7 @@ namespace Projekt1_Podorozhnyi_50402.ViewModels
         [Display(Name = "Surname")]
         public string Surname { get; set; }
 
-        [Required]
+        [Required]        
         [Display(Name = "Student Number")]
         public int StudentNum { get; set; }
 

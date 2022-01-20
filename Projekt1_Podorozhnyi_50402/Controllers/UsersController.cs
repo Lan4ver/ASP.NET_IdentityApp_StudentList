@@ -25,7 +25,7 @@ namespace Projekt1_Podorozhnyi_50402.Controllers
         }
         public async Task<IActionResult> ShowSearchResult(string SearchStudent)
         {
-            return View("Index", await _userManager.Users.Where(j => j.Email.Contains(SearchStudent)).ToListAsync());
+            return View("Index", await _userManager.Users.Where(j => j.Email.Contains(SearchStudent) || j.Surname.Contains(SearchStudent) || j.Name.Contains(SearchStudent) || j.StudentNum.ToString().Contains(SearchStudent)).ToListAsync());
         }
 
         public IActionResult Index() => View(_userManager.Users.ToList());
